@@ -10,6 +10,8 @@ class GiphysSearch {
     this.state = {
       search: ""
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -20,7 +22,7 @@ class GiphysSearch {
 
   handleSubmit(e) {
     e.preventDefault();
-    const search = this.state.search.split(' ').join('+')
+    const search = this.state.search.split(' ').join('+');
     this.props.fetchSearchGiphys(search).then(
       () => this.setState({
         search: ""
@@ -28,6 +30,9 @@ class GiphysSearch {
     );
   }
 
+  componentDidMount() {
+    this.props.fetchSearchGiphys("");
+  }
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
